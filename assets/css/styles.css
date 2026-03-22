@@ -423,6 +423,15 @@ body {
   color: white;
 }
 
+.project-card.featured .project-link {
+  color: white;
+}
+
+.project-card.featured .project-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
 .project-link {
   color: var(--accent);
   text-decoration: none;
@@ -433,6 +442,37 @@ body {
 
 .project-link:hover {
   opacity: 0.8;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.project-link.demo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: white;
+}
+
+.project-link.demo-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.project-link.demo-btn svg {
+  fill: currentColor;
 }
 
 /* ==================== CONTACT ==================== */
