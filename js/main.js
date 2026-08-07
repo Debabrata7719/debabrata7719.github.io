@@ -8,7 +8,7 @@
  *  4. Scroll-triggered fade-in animations
  */
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = 'https://debabrata7719-github-io.onrender.com';
 
 // =========================================================
 // 1. Mobile nav toggle
