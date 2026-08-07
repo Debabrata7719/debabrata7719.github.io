@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — Debabrata Dey</title>
+  <meta name="description"
+    content="Projects by Debabrata Dey — MeetMind, MoveIQ, Distributed Cache, FreelanceFlow, and NovaHR." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── Page ─────────────────────────────────────── */
+    .work-page {
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--spacing-margin-mobile);
+      padding-top: 64px;
+      padding-bottom: 128px;
+    }
+
+    @media (min-width: 768px) {
+      .work-page {
+        padding-inline: var(--spacing-margin-desktop);
+        padding-top: 128px;
+      }
+    }
+
+    /* ── Header section ───────────────────────────── */
+    .work-header {
+      margin-bottom: 80px;
+    }
+
+    .work-header h1 {
+      color: var(--color-on-surface);
+      margin-bottom: 20px;
+      max-width: 720px;
+    }
+
+    .work-header p {
+      color: var(--color-on-surface-variant);
+      max-width: 580px;
+    }
+
+    /* ── Project grid ─────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px 32px;
+    }
+
+    @media (min-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      cursor: pointer;
+    }
+
+    /* Stagger 2nd card down on desktop */
+    @media (min-width: 768px) {
+      .project-card:nth-child(even) {
+        margin-top: 64px;
+      }
+    }
+
+    .project-card .img-wrap {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--color-surface-container-high);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-tertiary-fixed-dim);
+    }
+
+    .project-card .img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .project-card:hover .img-wrap img {
+      transform: scale(1.03);
+    }
+
+    .card-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      background: var(--color-surface-container);
+      color: var(--color-on-surface-variant);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .badge-link:hover {
+      background: var(--color-primary);
+      color: var(--color-on-primary);
+    }
+
+    .card-title {
+      color: var(--color-on-surface);
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+
+    .project-card:hover .card-title {
+      color: var(--color-primary);
+    }
+
+    .card-desc {
+      color: var(--color-on-surface-variant);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ── CTA ──────────────────────────────────────── */
+    .work-cta {
+      margin-top: 100px;
+      padding-top: 64px;
+      border-top: 1px solid var(--color-outline-variant);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+    }
+
+    .work-cta h2 {
+      color: var(--color-on-surface);
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      color: var(--color-primary);
+      transition: color 0.2s;
+    }
+
+    .cta-link:hover {
+      color: var(--color-on-surface-variant);
+    }
+
+    .cta-link .material-symbols-outlined {
+      transition: transform 0.2s;
+    }
+
+    .cta-link:hover .material-symbols-outlined {
+      transform: translateX(4px);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ====================================================
+       Navigation
+       ==================================================== -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">DEBABRATA DEY</a>
+      <nav class="nav-links">
+        <a href="about.html" data-page="about.html">About</a>
+        <a href="work.html" data-page="work.html">Work</a>
+        <a href="contact.html" data-page="contact.html">Contact</a>
+      </nav>
+      <a href="contact.html" class="nav-hire-btn">Hire Me</a>
+      <button class="nav-menu-btn" id="menu-btn" aria-label="Toggle menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+    <nav class="nav-mobile" id="mobile-nav">
+      <a href="about.html" data-page="about.html">About</a>
+      <a href="work.html" data-page="work.html">Work</a>
+      <a href="contact.html" data-page="contact.html">Contact</a>
+      <a href="contact.html" style="color:var(--color-primary);">Hire Me</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="work-page">
+
+      <!-- Header -->
+      <section class="work-header fade-in">
+        <h1 class="text-headline-xl">Featured Projects</h1>
+        <p class="text-body-lg">
+          A collection of production-ready backend systems, AI applications, and
+          scalable software engineered to solve real-world problems.
+        </p>
+      </section>
+
+      <!-- Projects grid -->
+      <section class="projects-grid">
+
+        <!-- 1. MeetMind -->
+        <article class="project-card fade-in">
+          <div class="img-wrap">
+            <img src="../asset/MeetMind.png" alt="MeetMind platform screenshot" />
+          </div>
+          <div class="card-badges">
+            <a href="https://meet-mind-wine.vercel.app/" class="badge-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              Live
+            </a>
+            <a href="https://github.com/Debabrata7719/MeetMind" class="badge-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+          <div>
+            <h2 class="text-headline-md card-title">MeetMind</h2>
+            <p class="text-body-md card-desc">
+              Streamlining meeting workflows with AI-generated summaries, task extraction,
+              and collaborative insights in one platform.
+            </p>
+          </div>
+        </article>
+
+        <!-- 2. MoveIQ -->
+        <article class="project-card fade-in">
+          <div class="img-wrap">
+            <img src="../asset/MoveIQ.png" alt="MoveIQ AI sports platform screenshot" />
+          </div>
+          <div class="card-badges">
+            <a href="https://move-iq-theta.vercel.app/" class="badge-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              Live
+            </a>
+            <a href="https://github.com/Debabrata7719/MoveIQ" class="badge-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+          <div>
+            <h2 class="text-headline-md card-title">MoveIQ</h2>
+            <p class="text-body-md card-desc">
+              Transforming athlete motion into actionable insights through pose estimation,
+              biomechanical analysis, and AI-driven injury risk assessment.
+            </p>
+          </div>
+        </article>
+
+        <!-- 3. Distributed Cache -->
+        <article class="project-card fade-in">
+          <div class="img-wrap">
+            <img src="../asset/Distributed Cache.png" alt="Distributed Cache system architecture" />
+          </div>
+          <div class="card-badges">
+            <span class="badge">Backend System</span>
+            <span class="badge">Redis</span>
+          </div>
+          <div>
+            <h2 class="text-headline-md card-title">Distributed Cache</h2>
+            <p class="text-body-md card-desc">
+              A high-performance distributed caching layer with Redis and consistent
+              hashing, designed for scalable, low-latency backend systems.
+            </p>
+          </div>
+        </article>
+
+        <!-- 4. FreelanceFlow -->
+        <article class="project-card fade-in">
+          <div class="img-wrap">
+            <img src="../asset/FreelanceFlow.png" alt="FreelanceFlow platform screenshot" />
+          </div>
+          <div class="card-badges">
+            <a href="https://freelance-flow-mocha-zeta.vercel.app/" class="badge-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              Live
+            </a>
+            <a href="https://github.com/Debabrata7719/Freelance_Flow" class="badge-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+          <div>
+            <h2 class="text-headline-md card-title">FreelanceFlow</h2>
+            <p class="text-body-md card-desc">
+              Streamlining freelancer–client collaboration with AI-generated progress
+              reports, automated check-ins, and real-time project visibility.
+            </p>
+          </div>
+        </article>
+
+        <!-- 5. NovaHR -->
+        <article class="project-card fade-in">
+          <div class="img-wrap">
+            <img src="../asset/NovaHR.png" alt="NovaHR AI workspace screenshot" />
+          </div>
+          <div class="card-badges">
+            <a href="https://hr-nova-two.vercel.app/" class="badge-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              Live
+            </a>
+            <a href="https://github.com/Debabrata7719/HRNova" class="badge-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+          <div>
+            <h2 class="text-headline-md card-title">NovaHR</h2>
+            <p class="text-body-md card-desc">
+              Modern HR workspace combining multi-agent AI, workflow automation, and
+              intelligent employee assistance into a unified platform.
+            </p>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- CTA -->
+      <section class="work-cta fade-in">
+        <h2 class="text-headline-lg">Have a project in mind?</h2>
+        <a href="contact.html" class="cta-link text-body-lg">
+          Let's discuss your vision
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ====================================================
+       Footer
+       ==================================================== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">DEBABRATA DEY</div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/debabratadey7719/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Debabrata7719" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://x.com/Debabrata_Dey7" target="_blank" rel="noopener">Twitter</a>
+        <a href="../asset/resume (2).pdf" download="Debabrata_Dey_Resume.pdf">Resume</a>
+      </div>
+      <div class="footer-copy">© 2026 Debabrata Dey</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>

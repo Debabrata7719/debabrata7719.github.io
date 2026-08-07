@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Debabrata Dey</title>
+  <meta name="description" content="Learn about Debabrata Dey — backend engineer, AI developer, and cloud infrastructure specialist." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── Page layout ──────────────────────────────── */
+    .about-page {
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--spacing-margin-mobile);
+      padding-top: 64px;
+      padding-bottom: 128px;
+    }
+    @media (min-width: 768px) {
+      .about-page {
+        padding-inline: var(--spacing-margin-desktop);
+        padding-top: 128px;
+        display: grid;
+        grid-template-columns: 5fr 7fr;
+        gap: 64px;
+        align-items: start;
+      }
+    }
+
+    /* ── Left: portrait ───────────────────────────── */
+    .portrait-col { position: relative; }
+    @media (min-width: 768px) {
+      .portrait-sticky { position: sticky; top: 96px; }
+    }
+    .portrait-wrap {
+      aspect-ratio: 4/5;
+      background: var(--color-surface-container-high);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .portrait-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: grayscale(100%);
+      opacity: 0.9;
+      transition: filter 0.7s, opacity 0.7s;
+    }
+    .portrait-wrap:hover img {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+    .portrait-resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      color: var(--color-on-surface-variant);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .portrait-resume-btn:hover { color: var(--color-primary); }
+
+    /* ── Right: content ───────────────────────────── */
+    .content-col {
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+      margin-top: 48px;
+    }
+    @media (min-width: 768px) { .content-col { margin-top: 0; gap: 80px; } }
+
+    /* Section headings */
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--color-on-surface-variant);
+      border-bottom: 1px solid var(--color-outline-variant);
+      padding-bottom: 16px;
+      margin-bottom: 32px;
+    }
+
+    /* Skills list */
+    .skills-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .skills-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 16px;
+      color: var(--color-on-surface);
+    }
+    .skill-dash { color: var(--color-tertiary); flex-shrink: 0; }
+    .skill-title {
+      display: block;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .skill-desc { color: var(--color-on-surface-variant); }
+
+    /* Experience */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .exp-item { }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .exp-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--color-primary);
+      transition: color 0.2s;
+    }
+    .exp-item:hover .exp-title { color: var(--color-tertiary); }
+    .exp-date {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--color-on-surface-variant);
+    }
+    .exp-company {
+      font-size: 16px;
+      color: var(--color-on-surface-variant);
+      margin-bottom: 12px;
+    }
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .exp-bullets li {
+      font-size: 16px;
+      color: var(--color-on-surface-variant);
+      line-height: 1.6;
+      padding-left: 16px;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--color-outline-variant);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====================================================
+       Navigation
+       ==================================================== -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">DEBABRATA DEY</a>
+      <nav class="nav-links">
+        <a href="about.html"   data-page="about.html">About</a>
+        <a href="work.html"    data-page="work.html">Work</a>
+        <a href="contact.html" data-page="contact.html">Contact</a>
+      </nav>
+      <a href="contact.html" class="nav-hire-btn">Hire Me</a>
+      <button class="nav-menu-btn" id="menu-btn" aria-label="Toggle menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+    <nav class="nav-mobile" id="mobile-nav">
+      <a href="about.html"   data-page="about.html">About</a>
+      <a href="work.html"    data-page="work.html">Work</a>
+      <a href="contact.html" data-page="contact.html">Contact</a>
+      <a href="contact.html" style="color:var(--color-primary);">Hire Me</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="about-page">
+
+      <!-- ================================================
+           Left — Portrait
+           ================================================ -->
+      <aside class="portrait-col fade-in">
+        <div class="portrait-sticky">
+          <div class="portrait-wrap">
+            <img src="../asset/Profile.jpg" alt="Debabrata Dey — portrait" />
+          </div>
+          <a href="../asset/resume (2).pdf" download="Debabrata_Dey_Resume.pdf" class="portrait-resume-btn">
+            <span class="material-symbols-outlined" style="font-size:16px;">download</span>
+            Download Resume
+          </a>
+        </div>
+      </aside>
+
+      <!-- ================================================
+           Right — Content
+           ================================================ -->
+      <div class="content-col">
+
+        <!-- Story -->
+        <section class="fade-in">
+          <h1 class="text-headline-xl" style="color:var(--color-primary); margin-bottom:32px;">
+            Turning ideas into<br>scalable software.
+          </h1>
+          <div class="text-body-lg" style="color:var(--color-on-surface-variant); display:flex; flex-direction:column; gap:20px;">
+            <p>
+              I build modern backend systems that combine AI, automation, and cloud
+              technologies to create reliable software products.
+            </p>
+            <p>
+              Whether it's designing distributed architectures, integrating LLMs,
+              or building APIs from scratch, I enjoy solving challenging engineering
+              problems with clean and scalable solutions.
+            </p>
+          </div>
+        </section>
+
+        <!-- Core capabilities -->
+        <section class="fade-in">
+          <h2 class="section-label">Core Capabilities</h2>
+          <ul class="skills-list">
+            <li>
+              <span class="skill-dash">—</span>
+              <div>
+                <strong class="skill-title">Backend Engineering</strong>
+                <span class="skill-desc">Scalable APIs, clean architecture, authentication, and distributed system design</span>
+              </div>
+            </li>
+            <li>
+              <span class="skill-dash">—</span>
+              <div>
+                <strong class="skill-title">Artificial Intelligence</strong>
+                <span class="skill-desc">LLMs, LangGraph agents, RAG, computer vision, and workflow automation</span>
+              </div>
+            </li>
+            <li>
+              <span class="skill-dash">—</span>
+              <div>
+                <strong class="skill-title">Cloud Infrastructure</strong>
+                <span class="skill-desc">Docker, Redis, PostgreSQL, CI/CD, cloud deployment, and performance optimisation</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Experience -->
+        <section class="fade-in">
+          <h2 class="section-label">Select Experience</h2>
+          <div class="experience-list">
+            <div class="exp-item">
+              <div class="exp-header">
+                <h3 class="exp-title">AI/ML Engineering Intern</h3>
+                <span class="exp-date">May 2026 – Aug 2026</span>
+              </div>
+              <p class="exp-company">Infosys Springboard</p>
+              <ul class="exp-bullets">
+                <li>
+                  Built an AI-powered sports injury detection platform using
+                  <strong>FastAPI</strong>, <strong>MediaPipe</strong>, and <strong>OpenCV</strong>,
+                  delivering real-time risk assessment and corrective recommendations.
+                </li>
+                <li>
+                  Developed scalable backend architecture with <strong>PostgreSQL</strong>,
+                  <strong>Redis</strong>, <strong>Celery</strong>, <strong>Docker</strong>,
+                  <strong>WebSockets</strong>, and <strong>Elasticsearch</strong>,
+                  enabling secure and high-performance applications.
+                </li>
+                <li>
+                  Implemented enterprise-grade infrastructure including <strong>JWT</strong>,
+                  <strong>Google OAuth</strong>, <strong>RBAC</strong>, API rate limiting, and
+                  automated <strong>GitHub Actions CI/CD</strong> pipelines for production-ready deployment.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ====================================================
+       Footer
+       ==================================================== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">DEBABRATA DEY</div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/debabratadey7719/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Debabrata7719"             target="_blank" rel="noopener">GitHub</a>
+        <a href="https://x.com/Debabrata_Dey7"                 target="_blank" rel="noopener">Twitter</a>
+        <a href="../asset/resume (2).pdf"                       download="Debabrata_Dey_Resume.pdf">Resume</a>
+      </div>
+      <div class="footer-copy">© 2026 Debabrata Dey</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

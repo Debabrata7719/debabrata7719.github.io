@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debabrata Dey — Backend Engineer & AI Developer</title>
+  <meta name="description" content="Portfolio of Debabrata Dey — a backend engineer specialising in AI, automation, and cloud-native software." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── Hero ───────────────────────────────────────── */
+    .hero {
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--spacing-margin-mobile);
+      padding-top: 96px;
+      padding-bottom: 96px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    @media (min-width: 768px) {
+      .hero {
+        padding-inline: var(--spacing-margin-desktop);
+        padding-top: 128px;
+        padding-bottom: 128px;
+      }
+    }
+    .hero h1 {
+      color: var(--color-on-surface);
+      max-width: 720px;
+    }
+    .hero p {
+      color: var(--color-on-surface-variant);
+      max-width: 580px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    /* ── Featured projects ──────────────────────────── */
+    .featured {
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--spacing-margin-mobile);
+      padding-bottom: 128px;
+    }
+    @media (min-width: 768px) {
+      .featured { padding-inline: var(--spacing-margin-desktop); }
+    }
+
+    /* Full-width project */
+    .project-full {
+      cursor: pointer;
+      margin-bottom: 80px;
+    }
+    .project-full .img-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: var(--color-surface-container-low);
+      aspect-ratio: 21/9;
+      margin-bottom: 24px;
+    }
+    .project-full .img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .project-full:hover .img-wrap img { transform: scale(1.02); }
+    .project-full-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    @media (min-width: 768px) {
+      .project-full-meta {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+    }
+    .project-full h2 {
+      color: var(--color-on-surface);
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .project-full:hover h2 { color: var(--color-primary); }
+    .project-full p {
+      color: var(--color-on-surface-variant);
+      max-width: 540px;
+    }
+    .badge-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* Half-width grid */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    @media (min-width: 768px) {
+      .project-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    .project-half {
+      cursor: pointer;
+    }
+    .project-half .img-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: var(--color-surface-container-low);
+      aspect-ratio: 1/1;
+      margin-bottom: 20px;
+    }
+    .project-half .img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .project-half:hover .img-wrap img { transform: scale(1.02); }
+    .project-half h2 {
+      color: var(--color-on-surface);
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .project-half:hover h2 { color: var(--color-primary); }
+    .project-half p {
+      color: var(--color-on-surface-variant);
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====================================================
+       Navigation
+       ==================================================== -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">DEBABRATA DEY</a>
+      <nav class="nav-links">
+        <a href="about.html"   data-page="about.html">About</a>
+        <a href="work.html"    data-page="work.html">Work</a>
+        <a href="contact.html" data-page="contact.html">Contact</a>
+      </nav>
+      <a href="contact.html" class="nav-hire-btn">Hire Me</a>
+      <button class="nav-menu-btn" id="menu-btn" aria-label="Toggle menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+    <nav class="nav-mobile" id="mobile-nav">
+      <a href="about.html"   data-page="about.html">About</a>
+      <a href="work.html"    data-page="work.html">Work</a>
+      <a href="contact.html" data-page="contact.html">Contact</a>
+      <a href="contact.html" style="color:var(--color-primary);">Hire Me</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ====================================================
+         Hero
+         ==================================================== -->
+    <section class="hero">
+      <h1 class="text-headline-xl fade-in">
+        Turning ideas into<br>scalable software.
+      </h1>
+      <p class="text-body-lg fade-in">
+        I am Debabrata Dey, a backend engineer specialising in AI, automation,
+        and cloud-native systems. I build reliable software products that are
+        clean, fast, and built to last.
+      </p>
+      <div class="hero-ctas fade-in">
+        <a href="work.html"    class="btn-primary">View Work</a>
+        <a href="about.html"   class="btn-outline">Read Bio</a>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         Featured Projects
+         ==================================================== -->
+    <section class="featured" id="work">
+
+      <!-- Full-width: MeetMind -->
+      <article class="project-full fade-in" onclick="location.href='work.html'">
+        <div class="img-wrap">
+          <img src="../asset/MeetMind.png" alt="MeetMind — AI meeting intelligence platform" />
+        </div>
+        <div class="project-full-meta">
+          <div>
+            <h2 class="text-headline-md">MeetMind</h2>
+            <p class="text-body-md">
+              Streamlining meeting workflows with AI-generated summaries, task extraction,
+              and collaborative insights — all in one platform.
+            </p>
+          </div>
+          <div class="badge-row">
+            <span class="badge">FastAPI</span>
+            <span class="badge">LangGraph</span>
+            <span class="badge">AI</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Half-width grid -->
+      <div class="project-grid">
+
+        <!-- MoveIQ -->
+        <article class="project-half fade-in" onclick="location.href='work.html'">
+          <div class="img-wrap">
+            <img src="../asset/MoveIQ.png" alt="MoveIQ — AI sports injury detection" />
+          </div>
+          <h2 class="text-headline-sm">MoveIQ</h2>
+          <p class="text-body-md">
+            Real-time athlete motion analysis with pose estimation, biomechanics,
+            and AI injury risk assessment.
+          </p>
+          <div class="badge-row">
+            <span class="badge">Computer Vision</span>
+          </div>
+        </article>
+
+        <!-- Distributed Cache -->
+        <article class="project-half fade-in" onclick="location.href='work.html'">
+          <div class="img-wrap">
+            <img src="../asset/Distributed Cache.png" alt="Distributed Cache system" />
+          </div>
+          <h2 class="text-headline-sm">Distributed Cache</h2>
+          <p class="text-body-md">
+            A high-performance distributed caching layer with Redis and consistent
+            hashing for scalable backend systems.
+          </p>
+          <div class="badge-row">
+            <span class="badge">Redis</span>
+            <span class="badge">Systems</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================
+       Footer
+       ==================================================== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">DEBABRATA DEY</div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/debabratadey7719/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Debabrata7719"             target="_blank" rel="noopener">GitHub</a>
+        <a href="https://x.com/Debabrata_Dey7"                 target="_blank" rel="noopener">Twitter</a>
+        <a href="../asset/resume (2).pdf"                       download="Debabrata_Dey_Resume.pdf">Resume</a>
+      </div>
+      <div class="footer-copy">© 2026 Debabrata Dey</div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
