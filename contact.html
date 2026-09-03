@@ -14,14 +14,14 @@
       max-width: var(--container-max);
       margin-inline: auto;
       padding-inline: var(--spacing-margin-mobile);
-      padding-top: 64px;
+      padding-top: 32px;
       padding-bottom: 128px;
     }
 
     @media (min-width: 768px) {
       .contact-page {
         padding-inline: var(--spacing-margin-desktop);
-        padding-top: 128px;
+        padding-top: 48px;
         display: grid;
         grid-template-columns: 5fr 6fr;
         gap: 64px;
@@ -32,40 +32,48 @@
     /* ── Left: info ───────────────────────────────── */
     .contact-info h1 {
       color: var(--color-on-surface);
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .contact-intro {
       color: var(--color-on-surface-variant);
       max-width: 400px;
-      margin-bottom: 48px;
+      margin-bottom: 28px;
+    }
+
+        .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
 
     .contact-detail-label {
-      font-size: 12px;
-      letter-spacing: 0.1em;
+      font-size: 11px;
+      letter-spacing: 0.12em;
       font-weight: 600;
       text-transform: uppercase;
       color: var(--color-on-surface-variant);
-      margin-bottom: 6px;
+      margin-bottom: 10px;
+      opacity: 0.85;
     }
 
-    /* ── Styled Contact & Social Link Cards ──────── */
+    /* ── Minimal Rounded Pill Contact & Social Links ── */
     .contact-link-card {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      padding: 14px 20px;
+      gap: 10px;
+      padding: 12px 20px;
       background: var(--color-surface-container-lowest);
       border: 1px solid var(--color-outline-variant);
-      border-radius: var(--radius-md);
+      border-radius: 9999px;
       color: var(--color-on-surface);
       font-family: var(--font-sans);
-      font-size: 16px;
+      font-size: 14.5px;
       font-weight: 500;
       text-decoration: none;
       transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
       width: 100%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }
 
     .contact-link-card:hover {
@@ -73,26 +81,26 @@
       color: var(--color-on-primary);
       border-color: var(--color-primary);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(24, 36, 31, 0.1);
+      box-shadow: 0 6px 18px rgba(24, 36, 31, 0.1);
     }
 
     .contact-link-card svg.icon-logo {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       fill: currentColor;
       flex-shrink: 0;
       transition: transform 0.2s;
     }
 
     .contact-link-card:hover svg.icon-logo {
-      transform: scale(1.12);
+      transform: scale(1.1);
     }
 
     .contact-link-card svg.icon-arrow {
-      width: 14px;
-      height: 14px;
+      width: 13px;
+      height: 13px;
       fill: currentColor;
-      opacity: 0.5;
+      opacity: 0.45;
       margin-left: auto;
       transition: transform 0.2s, opacity 0.2s;
     }
@@ -103,10 +111,22 @@
     }
 
     .contact-social-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 12px;
-      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-social-grid .contact-link-card {
+      width: auto;
+      flex: 1 1 0;
+      min-width: 100px;
+      padding: 10px 16px;
+      justify-content: center;
+      font-size: 13.5px;
+    }
+
+    .contact-social-grid .contact-link-card svg.icon-arrow {
+      margin-left: 4px;
     }
 
     .contact-email {
@@ -207,7 +227,7 @@
       <nav class="nav-links">
         <a href="index.html" data-page="index.html">About</a>
         <a href="work.html" data-page="work.html">Work</a>
-        <a href="contact.html" data-page="contact.html">Contact</a>
+        <a href="contact.html" class="active" data-page="contact.html">Contact</a>
       </nav>
       <a href="contact.html" class="nav-hire-btn">Let's connect</a>
       <button class="nav-menu-btn" id="menu-btn" aria-label="Toggle menu">

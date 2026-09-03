@@ -34,17 +34,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================================================
-  // 2. Active Navigation Link
+  // 2. Active Navigation Link & Underline
   // =========================================================
 
-  const page =
-    window.location.pathname.split("/").pop() || "index.html";
+  const currentPath = window.location.pathname.toLowerCase();
+  let page = currentPath.split("/").pop() || "index.html";
+  if (page === "" || page === "about.html" || currentPath.endsWith("/")) {
+    page = "index.html";
+  } else if (!page.endsWith(".html")) {
+    page = page + ".html";
+  }
 
-  document.querySelectorAll("[data-page]").forEach((link) => {
+  document.querySelectorAll(".nav-links a[data-page]").forEach((link) => {
     if (link.dataset.page === page) {
       link.classList.add("active");
-      link.style.opacity = "1";
-      link.style.color = "var(--color-primary)";
+    } else {
+      link.classList.remove("active");
     }
   });
 

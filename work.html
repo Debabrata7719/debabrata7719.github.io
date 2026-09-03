@@ -88,30 +88,69 @@
       transform: scale(1.03);
     }
 
-    .card-badges {
+        .card-badges {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      gap: 12px;
+      width: 100%;
     }
 
     .badge-link {
+      flex: 1 1 0;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      padding: 6px 12px;
-      background: var(--color-surface-container);
-      color: var(--color-on-surface-variant);
-      font-size: 12px;
-      letter-spacing: 0.1em;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--color-surface-container-lowest);
+      color: var(--color-on-surface);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      letter-spacing: 0.08em;
       font-weight: 600;
       text-transform: uppercase;
-      border-radius: var(--radius-sm);
-      transition: background 0.2s, color 0.2s;
+      border: 1px solid var(--color-outline-variant);
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }
 
     .badge-link:hover {
       background: var(--color-primary);
       color: var(--color-on-primary);
+      border-color: var(--color-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(24, 36, 31, 0.1);
+    }
+
+    .badge-link svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .badge-link:hover svg {
+      transform: scale(1.1);
+    }
+
+    .card-badges .badge {
+      flex: 1 1 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      background: var(--color-surface-container);
+      color: var(--color-on-surface-variant);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      text-transform: uppercase;
+      border: 1px solid var(--color-outline-variant);
+      border-radius: 9999px;
+      text-align: center;
     }
 
     .card-title {
@@ -191,7 +230,7 @@
       <a href="index.html" class="nav-logo">DEBABRATA DEY</a>
       <nav class="nav-links">
         <a href="index.html" data-page="index.html">About</a>
-        <a href="work.html" data-page="work.html">Work</a>
+        <a href="work.html" class="active" data-page="work.html">Work</a>
         <a href="contact.html" data-page="contact.html">Contact</a>
       </nav>
       <a href="contact.html" class="nav-hire-btn">Let's connect</a>
