@@ -1,9 +1,9 @@
 """
-routes/contact.py - POST /contact endpoint with rate limiting and DNS MX verification.
+routes/contact.py - POST /contact endpoint with rate limiting and strict MX verification.
 
-Validates the incoming payload, verifies the sender's email domain has active
-mail servers (MX records), forwards it to the email service, and returns a
-structured response. Rate-limited to 5 requests per IP per 10 minutes to prevent spam.
+Validates the incoming payload, performs strict Mail Exchange (MX) DNS verification
+to block fake/disposable domains, forwards legitimate messages to Resend, and returns
+a structured response. Rate-limited to 5 requests per IP per 10 minutes.
 """
 
 import logging
@@ -17,41 +17,61 @@ from backend.services.email_service import send_contact_email
 
 logger = logging.getLogger(__name__)
 
-# Limiter is configured globally in main.py; importing it here so
-# the decorator below can reference it without circular imports.
 limiter = Limiter(key_func=get_remote_address)
 
 router = APIRouter(tags=["Contact"])
 
+# Common disposable / temporary email domains to reject instantly
+DISPOSABLE_DOMAINS = {
+    "mailinator.com", "tempmail.com", "guerrillamail.com", "10minutemail.com",
+    "sharklasers.com", "yopmail.com", "throwawaymail.com", "trashmail.com",
+    "fucker.com", "dispostable.com", "getairmail.com", "temp-mail.org",
+}
+
 
 def verify_email_domain(email: str) -> bool:
-    """Verify that the email's domain actually has active mail exchange (MX) servers."""
+    """Strictly verify that the domain has legitimate active Mail Exchange (MX) servers."""
     try:
+        if "@" not in email:
+            return False
+
         domain = email.split("@")[-1].strip().lower()
+
+        # 1. Check basic domain structure
         if not domain or "." not in domain:
             return False
 
-        # Query DNS for MX records
-        try:
-            records = dns.resolver.resolve(domain, "MX", lifetime=3.0)
-            if records:
-                return True
-        except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN, dns.resolver.LifetimeTimeout):
-            pass
+        # 2. Check known disposable / spam domains
+        if domain in DISPOSABLE_DOMAINS:
+            logger.info("Blocked known spam/disposable domain: %s", domain)
+            return False
 
-        # Fallback: check A record (RFC 5321 permits direct A-record host routing if no MX exists)
-        try:
-            records = dns.resolver.resolve(domain, "A", lifetime=2.0)
-            if records:
-                return True
-        except Exception:
-            pass
+        # 3. Strict MX DNS query (must have genuine mail exchange records)
+        resolver = dns.resolver.Resolver()
+        resolver.timeout = 3.0
+        resolver.lifetime = 3.0
 
+        try:
+            mx_records = resolver.resolve(domain, "MX")
+            valid_mx = [
+                str(r.exchange).rstrip(".")
+                for r in mx_records
+                if str(r.exchange).strip() not in (".", "")
+            ]
+            if not valid_mx:
+                logger.info("Domain %s has empty or null MX record", domain)
+                return False
+            return True
+        except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN, dns.resolver.NoNameservers):
+            logger.info("Domain %s has no active MX records", domain)
+            return False
+        except dns.resolver.Timeout:
+            logger.warning("DNS timeout querying MX for %s", domain)
+            return False
+
+    except Exception as exc:
+        logger.error("Unexpected error verifying domain %s: %s", email, exc)
         return False
-    except Exception as e:
-        logger.warning("DNS lookup failed for %s: %s", email, e)
-        # In case of internal DNS timeout/error, allow request to proceed
-        return True
 
 
 @router.post(
@@ -59,8 +79,8 @@ def verify_email_domain(email: str) -> bool:
     response_model=ContactResponse,
     summary="Submit contact form",
     description=(
-        "Validates the payload, checks for active MX records on the email domain, "
-        "sends an email to the portfolio owner via Resend, and returns a success response. "
+        "Validates the payload, verifies valid MX mail records on the domain, "
+        "sends an email via Resend, and returns a success response. "
         "Rate-limited to 5 requests per IP per 10 minutes."
     ),
 )
@@ -69,29 +89,21 @@ async def submit_contact(
     request: Request,
     payload: ContactRequest,
 ) -> ContactResponse:
-    """Handle a contact form submission.
-
-    Args:
-        request:  FastAPI Request object (required by slowapi).
-        payload:  Validated ContactRequest body.
-
-    Returns:
-        ContactResponse with success=True on delivery, or raises
-        HTTPException 400 on fake email domain or 500 on email failure.
-    """
+    """Handle a contact form submission."""
     logger.info(
         "Contact form submission received from '%s' <%s>",
         payload.name,
         payload.email,
     )
 
-    # Validate that the email domain actually exists and accepts mail
-    email_str = str(payload.email)
+    email_str = str(payload.email).strip()
+
+    # Verify that the email domain actually has mail servers configured to receive emails
     if not verify_email_domain(email_str):
-        logger.warning("Rejected contact form from invalid/non-existent domain: %s", email_str)
+        logger.warning("Rejected fake/invalid email domain: %s", email_str)
         raise HTTPException(
             status_code=400,
-            detail="The email domain does not appear to be active or able to receive mail. Please use a real email address.",
+            detail="The email domain does not have active mail servers. Please enter a valid, active email address.",
         )
 
     try:
